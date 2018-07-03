@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">DotaViewer-Android</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_pro_games">Pro games</string>
+    <string name="title_settings">Settings</string>
+</resources>
