@@ -1,5 +1,11 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="visible">1</dimen>
+    <dimen name="almost_visible">0.72</dimen>
+    <dimen name="semi_visible">0.58</dimen>
+    <dimen name="almost_invisible">0.32</dimen>
+    <dimen name="invisible">0</dimen>
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
