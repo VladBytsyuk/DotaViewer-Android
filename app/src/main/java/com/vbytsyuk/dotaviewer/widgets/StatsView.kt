@@ -4,7 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 
-class StatsView(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : View(context, attrs, defStyleAttr, defStyleRes) {
+class StatsView
+        @JvmOverloads constructor(context: Context,
+                                  attrs: AttributeSet? = null,
+                                  defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
 
     data class Data(val avatarUrl: String,
                     val name: String,
