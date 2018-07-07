@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="96dp">
 
-
     <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/stats_view_icon_size"
         android:layout_height="@dimen/stats_view_icon_size"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/stats_view_icon_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:alpha="@dimen/visible"
         android:includeFontPadding="false"
         android:text="@string/stats_view_name_default"
