@@ -12,10 +12,10 @@
         android:layout_height="@dimen/stats_view_icon_size"
         android:layout_marginStart="16dp"
         android:layout_marginTop="22dp"
+        android:contentDescription="@string/stats_view_icon_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/holo_red_dark"
-        android:contentDescription="@string/stats_view_icon_description"/>
+        app:srcCompat="@android:color/holo_red_dark"/>
 
     <TextView
         android:id="@+id/name"
@@ -37,11 +37,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/almost_visible"
         android:includeFontPadding="false"
         android:text="@string/stats_view_rank_default"
-        android:textSize="@dimen/stats_view_rank_text_size"
         android:textColor="@color/base"
-        android:alpha="@dimen/almost_visible"
+        android:textSize="@dimen/stats_view_rank_text_size"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name"/>
 
@@ -50,11 +50,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:alpha="@dimen/almost_visible"
         android:includeFontPadding="false"
         android:text="@string/stats_view_time_default"
-        android:textSize="@dimen/stats_view_time_text_size"
         android:textColor="@color/base"
-        android:alpha="@dimen/almost_visible"
+        android:textSize="@dimen/stats_view_time_text_size"
         app:layout_constraintStart_toStartOf="@+id/rank"
         app:layout_constraintTop_toBottomOf="@+id/rank"/>
 
@@ -63,11 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="118dp"
+        android:alpha="@dimen/almost_visible"
         android:includeFontPadding="false"
         android:text="@string/stats_view_winrate_default"
-        android:textSize="@dimen/stats_view_winrate_text_size"
         android:textColor="@color/bad"
-        android:alpha="@dimen/almost_visible"
+        android:textSize="@dimen/stats_view_winrate_text_size"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/rank"/>
 
@@ -76,11 +76,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:alpha="@dimen/almost_visible"
         android:includeFontPadding="false"
         android:text="@string/stats_view_kda_default"
-        android:textSize="@dimen/stats_view_kda_text_size"
         android:textColor="@color/good"
-        android:alpha="@dimen/almost_visible"
+        android:textSize="@dimen/stats_view_kda_text_size"
         app:layout_constraintStart_toStartOf="@+id/winrate"
         app:layout_constraintTop_toBottomOf="@+id/winrate"/>
 </android.support.constraint.ConstraintLayout>
