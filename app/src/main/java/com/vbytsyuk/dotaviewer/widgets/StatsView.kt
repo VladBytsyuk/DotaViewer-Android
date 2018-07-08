@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
+import com.vbytsyuk.dotaviewer.R
 import kotlinx.android.synthetic.main.view_stats.view.*
 
 
@@ -21,6 +22,15 @@ class StatsView @JvmOverloads constructor(
         inflater.inflate(R.layout.view_stats, this, true)
         textViews = listOf(name, rank, time, winrate, kda)
     }
+    private fun loadingDone() {
+        icon.background = null
+        icon.setImageDrawable(R.mipmap.avatar.drawable)
+        textViews.forEach {
+            it.background = null
+        }
+    }
+
+
     private val Int.drawable
         get() = ContextCompat.getDrawable(context, this)
 
