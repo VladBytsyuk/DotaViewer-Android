@@ -8,6 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.vbytsyuk.dotaviewer.widgets.StatsView
+        android:id="@+id/statsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
