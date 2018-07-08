@@ -22,6 +22,18 @@ class StatsView @JvmOverloads constructor(
         inflater.inflate(R.layout.view_stats, this, true)
         textViews = listOf(name, rank, time, winrate, kda)
     }
+
+
+    fun bind(data: Data) {
+        name.text = data.name
+        rank.text = data.rank
+        time.text = data.time
+        winrate.text = data.winrate
+        kda.text = data.kda
+        loadingDone()
+    }
+
+
     private fun loadingDone() {
         icon.background = null
         icon.setImageDrawable(R.mipmap.avatar.drawable)
