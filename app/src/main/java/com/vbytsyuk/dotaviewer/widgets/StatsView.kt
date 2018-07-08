@@ -2,6 +2,7 @@ package com.vbytsyuk.dotaviewer.widgets
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -20,6 +21,10 @@ class StatsView @JvmOverloads constructor(
         inflater.inflate(R.layout.view_stats, this, true)
         textViews = listOf(name, rank, time, winrate, kda)
     }
+    private val Int.drawable
+        get() = ContextCompat.getDrawable(context, this)
+
+
     data class Data(
         val avatarUrl: String,
         val name: String,
