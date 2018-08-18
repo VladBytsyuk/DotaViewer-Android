@@ -10,4 +10,6 @@
     <string name="stats_view_time_default">⠀⠀⠀⠀⠀⠀⠀⠀⠀</string>
     <string name="stats_view_winrate_default">⠀⠀⠀⠀⠀⠀⠀⠀⠀</string>
     <string name="stats_view_kda_default">⠀⠀⠀⠀⠀⠀⠀⠀⠀</string>
+
+    <string name="error_text_empty_data">Error in server response. Empty data.</string>
 </resources>
