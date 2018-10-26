@@ -5,14 +5,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.vbytsyuk.dotaviewer"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionName "v0.0.1-alpha"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -26,20 +26,32 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':mvp')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //Support library
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+
+    //Arch components
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
+
+    //Koin
+    ext.koin_version = '1.0.1'
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.2.0'
-    kapt 'com.github.bumptech.glide:compiler:4.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    kapt 'com.github.bumptech.glide:compiler:4.7.1'
 
     //Tests
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }

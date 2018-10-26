@@ -2,10 +2,10 @@ package com.vbytsyuk.dotaviewer
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 
 val appContext: Context
-    get() = DotaViewerApp.applicationContext
+    get() = DotaViewerApp.instance.applicationContext
 
 val Int.resString: String
     get() = appContext.getString(this)
