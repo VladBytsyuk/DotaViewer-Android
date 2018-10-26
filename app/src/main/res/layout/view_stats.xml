@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="96dp">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/stats_view_icon_size"
+        android:layout_height="@dimen/stats_view_icon_size"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/stats_view_icon_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_person"
+        android:background="@drawable/background_not_loaded"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:alpha="@dimen/visible"
+        android:background="@drawable/background_not_loaded"
+        android:includeFontPadding="false"
+        android:text="@string/stats_view_name_default"
+        android:textColor="@color/base"
+        android:textSize="@dimen/stats_view_name_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="@dimen/almost_visible"
+        android:background="@drawable/background_not_loaded"
+        android:includeFontPadding="false"
+        android:text="@string/stats_view_rank_default"
+        android:textColor="@color/base"
+        android:textSize="@dimen/stats_view_rank_text_size"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:alpha="@dimen/almost_visible"
+        android:background="@drawable/background_not_loaded"
+        android:includeFontPadding="false"
+        android:text="@string/stats_view_time_default"
+        android:textColor="@color/base"
+        android:textSize="@dimen/stats_view_time_text_size"
+        app:layout_constraintStart_toStartOf="@+id/rank"
+        app:layout_constraintTop_toBottomOf="@+id/rank"/>
+
+    <TextView
+        android:id="@+id/winrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="118dp"
+        android:alpha="@dimen/almost_visible"
+        android:background="@drawable/background_not_loaded"
+        android:includeFontPadding="false"
+        android:text="@string/stats_view_winrate_default"
+        android:textColor="@color/bad"
+        android:textSize="@dimen/stats_view_winrate_text_size"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/rank"/>
+
+    <TextView
+        android:id="@+id/kda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:alpha="@dimen/almost_visible"
+        android:background="@drawable/background_not_loaded"
+        android:includeFontPadding="false"
+        android:text="@string/stats_view_kda_default"
+        android:textColor="@color/good"
+        android:textSize="@dimen/stats_view_kda_text_size"
+        app:layout_constraintStart_toStartOf="@+id/winrate"
+        app:layout_constraintTop_toBottomOf="@+id/winrate"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
