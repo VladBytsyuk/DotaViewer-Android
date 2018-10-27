@@ -6,7 +6,7 @@ env:
     - ANDROID_BUILD_TOOLS_VERSION=25.0.2
 android:
   licenses:
-    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
   components:
@@ -22,7 +22,7 @@ android:
     - extra-android-m2repository
     - addon-google_apis-google-$ANDROID_API_LEVEL
 before_script:
-  # Prepare pre-accepted licenses to not be promted at installation
+  # Prepare pre-accepted licenses to not be prompted at installation
   - mkdir -p "$ANDROID_HOME/licenses"
   - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
 script:
