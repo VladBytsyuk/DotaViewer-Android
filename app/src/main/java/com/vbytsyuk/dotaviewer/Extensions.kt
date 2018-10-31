@@ -2,6 +2,9 @@ package com.vbytsyuk.dotaviewer
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 
 val appContext: Context
@@ -22,3 +25,11 @@ val Int.resDimen: Float
 
 val Int.dp2px: Float
     get() = this * appContext.resources.displayMetrics.density
+
+fun EditText.setOnTextChangedListener(listener: (String) -> Unit) =
+    addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {}
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) =
+            listener(p0.toString())
+    })
