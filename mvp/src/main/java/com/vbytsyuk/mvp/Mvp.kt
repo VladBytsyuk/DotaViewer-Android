@@ -14,14 +14,18 @@ abstract class MvpPresenter<VS : IMvpViewState, V : IMvpView<VS>>(
 
     private var view: V? = null
 
-    fun takeView(v: V) {
+    public fun takeView(v: V) {
         view = v
         v.render(viewState)
     }
 
-    fun dropView(v: V) {
+    public fun dropView(v: V) {
         if (view == v) {
             view = null
         }
+    }
+
+    public fun render() {
+        view?.render(viewState)
     }
 }

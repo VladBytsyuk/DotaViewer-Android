@@ -2,18 +2,19 @@ package com.vbytsyuk.mvp
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 
 enum class BaseMvpStateEnum { Loading, Data, Error }
-typealias State = BaseMvpStateEnum
 
 open class BaseMvpViewState<D>(
     val error: String? = null,
     open val data: D? = null
 ) : IMvpViewState {
-    val state: State
+    val state: BaseMvpStateEnum
         get() = when {
             error != null -> BaseMvpStateEnum.Error
             data != null -> BaseMvpStateEnum.Data
@@ -28,7 +29,15 @@ abstract class BaseMvpFragment<D, V : IBaseMvpView<D>, P : BaseMvpPresenter<D, V
     Fragment(),
     IBaseMvpView<D> {
 
+    abstract val layout: Int
     abstract val presenter: P
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(layout, container, false)
 
     @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,6 +47,7 @@ abstract class BaseMvpFragment<D, V : IBaseMvpView<D>, P : BaseMvpPresenter<D, V
 
     @Suppress("UNCHECKED_CAST")
     override fun onDestroyView() {
+        view?.let { (it.parent as ViewGroup).removeAllViews() }
         super.onDestroyView()
         presenter.dropView(this as V)
     }
