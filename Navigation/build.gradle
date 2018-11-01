@@ -6,7 +6,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.2.0'
     implementation 'junit:junit:4.12'
     implementation 'org.testng:testng:6.9.6'
 }
