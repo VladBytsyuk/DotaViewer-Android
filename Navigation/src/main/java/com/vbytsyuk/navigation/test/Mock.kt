@@ -22,7 +22,7 @@ internal class MockApp {
         router.navigator = MockNavigator(this)
     }
 
-    var screenStack: Stack<MockScreen> = Stack()
+    internal var screenStack: Stack<MockScreen> = Stack()
 
     val currentScreen: MockScreen?
         get() = if (screenStack.isNotEmpty()) screenStack.peek() else null
