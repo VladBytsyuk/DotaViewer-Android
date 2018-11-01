@@ -17,10 +17,11 @@ public open class Router<Screen> {
     /**
      * Platform-based implementation of [Navigator] interface
      */
-    public var navigator: Navigator<Screen>? = null
+    public var navigator: Navigator<Screen>?
         public set(new) {
             commandBuffer.navigator = new
         }
+        public get() = commandBuffer.navigator
 
 
     /**
