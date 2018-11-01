@@ -108,6 +108,39 @@ class NavigatorTest {
     }
 
     @Test
+    fun testRemoveAddNavigatorDuringNavigationWithThreeFragments() {
+        val app = MockApp()
+        val navigator = app.router.navigator!!
+        val screenA = MockScreen("A")
+        val screenB = MockScreen("B")
+        val screenC = MockScreen("C")
+
+        app.router.navigateTo(screenA)
+        assert(app.currentScreen == screenA)
+
+        app.router.navigator = null
+        assert(app.currentScreen == screenA)
+
+        app.router.navigateTo(screenB)
+        assert(app.currentScreen == screenA)
+
+        app.router.navigator = navigator
+        assert(app.currentScreen == screenB)
+
+        app.router.back()
+        assert(app.currentScreen == screenA)
+
+        app.router.navigator = null
+        assert(app.currentScreen == screenA)
+
+        app.router.navigator = navigator
+        assert(app.currentScreen == screenA)
+
+        app.router.navigateTo(screenC)
+        assert(app.currentScreen == screenC)
+    }
+
+    @Test
     fun testRemoveAddNavigatorAfterNavigationWithTwoFragments() {
         val app = MockApp()
         val navigator = app.router.navigator!!
