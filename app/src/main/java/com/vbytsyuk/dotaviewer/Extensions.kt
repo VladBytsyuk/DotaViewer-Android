@@ -1,6 +1,7 @@
 package com.vbytsyuk.dotaviewer
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
@@ -33,3 +34,15 @@ fun EditText.setOnTextChangedListener(listener: (String) -> Unit) =
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) =
             listener(p0.toString())
     })
+
+fun SharedPreferences.put(key: String, value: Any) = edit().run {
+    when (value) {
+        is String -> putString(key, value)
+        is Int -> putInt(key, value)
+        is Boolean -> putBoolean(key, value)
+        is Long -> putLong(key, value)
+        is Float -> putFloat(key, value)
+        else -> error("Only primitive types can be stored in SharedPreferences")
+    }
+    apply()
+}

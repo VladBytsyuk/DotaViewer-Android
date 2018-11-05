@@ -1,4 +1,4 @@
-package com.vbytsyuk.mvp
+package com.vbytsyuk.dotaviewer
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.vbytsyuk.mvp.IMvpView
+import com.vbytsyuk.mvp.IMvpViewState
+import com.vbytsyuk.mvp.MvpPresenter
+import org.koin.standalone.KoinComponent
 
 
 enum class BaseMvpStateEnum { Loading, Data, Error }
@@ -77,4 +81,4 @@ abstract class BaseMvpFragment<D, V : IBaseMvpView<D>, P : BaseMvpPresenter<D, V
 
 abstract class BaseMvpPresenter<D, V : IBaseMvpView<D>>(
     override var viewState: BaseMvpViewState<D>
-) : MvpPresenter<BaseMvpViewState<D>, V>(viewState)
+) : MvpPresenter<BaseMvpViewState<D>, V>(viewState), KoinComponent

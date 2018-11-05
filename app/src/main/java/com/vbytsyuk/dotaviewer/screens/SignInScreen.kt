@@ -2,22 +2,20 @@ package com.vbytsyuk.dotaviewer.screens
 
 import android.os.Bundle
 import android.view.View
-import com.vbytsyuk.dotaviewer.R
-import com.vbytsyuk.dotaviewer.Screen
-import com.vbytsyuk.mvp.BaseMvpFragment
-import com.vbytsyuk.mvp.BaseMvpPresenter
-import com.vbytsyuk.mvp.BaseMvpViewState
-import com.vbytsyuk.mvp.IBaseMvpView
+import com.vbytsyuk.dataprovider.SteamRepository
+import com.vbytsyuk.dotaviewer.*
 import com.vbytsyuk.navigation.Router
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.standalone.inject
 
 
 data class SignInData(
-    val steamLogin: String = "",
+    val email: String = "",
     val password: String = "",
-    val loginDone: Boolean = false
+    val steamId: String = "",
+    val isSignInDone: Boolean = false
 )
 typealias SignInViewState = BaseMvpViewState<SignInData>
 
@@ -33,16 +31,24 @@ class SignInFragment : BaseMvpFragment<SignInData, ISignInView, SignInPresenter>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signUp.setOnClickListener {
-            presenter.signUp(login.text.toString(), password.text.toString())
+            presenter.signUp(
+                login.text.toString(),
+                password.text.toString(),
+                steamId.text.toString()
+            )
         }
     }
 
 
     override fun renderData(data: SignInData) {
-        login.setText(data.steamLogin)
+        login.setText(data.email)
         password.setText(data.password)
+        steamId.setText(data.steamId)
 
-        if (data.loginDone) router.navigateTo(ProfileFragment())
+        if (data.isSignInDone) {
+            router.navigateTo(ProfileFragment())
+            presenter.clearSignInDone()
+        }
     }
 }
 
@@ -50,11 +56,23 @@ class SignInFragment : BaseMvpFragment<SignInData, ISignInView, SignInPresenter>
 class SignInPresenter(
     override var viewState: SignInViewState
 ) : BaseMvpPresenter<SignInData, ISignInView>(viewState) {
-    fun signUp(login: String, password: String) {
+    private val repository: SteamRepository by inject()
+
+
+    fun signUp(login: String, password: String, steamId: String) {
+        repository.steamID = steamId
         viewState = SignInViewState(
             error = viewState.error,
-            data = SignInData(login, password, loginDone = true)
+            data = SignInData(login, password, steamId, isSignInDone = true)
         )
         render()
+    }
+
+
+    fun clearSignInDone() {
+        viewState = SignInViewState(
+            error = viewState.error,
+            data = viewState.data?.copy(isSignInDone = false)
+        )
     }
 }

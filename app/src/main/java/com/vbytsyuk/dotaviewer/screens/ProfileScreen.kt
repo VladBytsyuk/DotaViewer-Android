@@ -2,14 +2,12 @@ package com.vbytsyuk.dotaviewer.screens
 
 import android.os.Bundle
 import android.view.View
-import com.vbytsyuk.dotaviewer.R
+import com.vbytsyuk.dataprovider.SteamRepository
+import com.vbytsyuk.dotaviewer.*
 import com.vbytsyuk.dotaviewer.widgets.StatsView
-import com.vbytsyuk.mvp.BaseMvpFragment
-import com.vbytsyuk.mvp.BaseMvpPresenter
-import com.vbytsyuk.mvp.BaseMvpViewState
-import com.vbytsyuk.mvp.IBaseMvpView
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.standalone.inject
 
 
 private typealias Data = StatsView.Data
@@ -29,7 +27,6 @@ class ProfileFragment : BaseMvpFragment<Data, IProfileView, ProfilePresenter>(),
         statsView.setOnClickListener { presenter.loadUserInfo() }
     }
 
-
     override fun renderData(data: Data) {
         statsView.bind(data)
     }
@@ -39,13 +36,15 @@ class ProfileFragment : BaseMvpFragment<Data, IProfileView, ProfilePresenter>(),
 class ProfilePresenter(
     override var viewState: ProfileViewState
 ) : BaseMvpPresenter<Data, IProfileView>(viewState) {
+    val repository: SteamRepository by inject()
+
     fun loadUserInfo() {
         viewState = ProfileViewState(
             error = null,
             data = StatsView.Data(
                 avatarUrl = "",
                 name = "Alan Turing",
-                rank = "Mathematician",
+                rank = repository.steamID,
                 time = "10000 hours",
                 winrate = "69% winrate",
                 kda = "KDA: 42"

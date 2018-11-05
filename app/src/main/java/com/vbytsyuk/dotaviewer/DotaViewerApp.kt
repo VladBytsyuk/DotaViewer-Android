@@ -1,6 +1,7 @@
 package com.vbytsyuk.dotaviewer
 
 import android.app.Application
+import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.screens.ProfilePresenter
 import com.vbytsyuk.dotaviewer.screens.ProfileViewState
 import com.vbytsyuk.dotaviewer.screens.SignInPresenter
@@ -15,6 +16,8 @@ import org.koin.dsl.module.module
 class DotaViewerApp : Application() {
     private val koinModule: Module
         get() = module {
+            single { SteamRepository(SharedPreferencesSource()) }
+
             single { ProfileTabNavigator() }
             single { Router<Screen>() }
 

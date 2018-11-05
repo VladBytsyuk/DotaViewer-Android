@@ -2,7 +2,6 @@ package com.vbytsyuk.dotaviewer
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.vbytsyuk.mvp.BaseMvpFragment
 import com.vbytsyuk.navigation.BackCommand
 import com.vbytsyuk.navigation.ForwardCommand
 import com.vbytsyuk.navigation.NavigationCommand
