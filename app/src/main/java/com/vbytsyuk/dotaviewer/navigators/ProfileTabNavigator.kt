@@ -1,14 +1,16 @@
-package com.vbytsyuk.dotaviewer
+package com.vbytsyuk.dotaviewer.navigators
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.vbytsyuk.dotaviewer.BaseMvpFragment
+import com.vbytsyuk.dotaviewer.R
 import com.vbytsyuk.navigation.BackCommand
 import com.vbytsyuk.navigation.ForwardCommand
 import com.vbytsyuk.navigation.NavigationCommand
 import com.vbytsyuk.navigation.Navigator
 
 
-typealias Screen = BaseMvpFragment<*, *, *>
+typealias Screen = BaseMvpFragment<*, *>
 
 class ProfileTabNavigator : Navigator<Screen> {
     var fragmentManager: FragmentManager? = null

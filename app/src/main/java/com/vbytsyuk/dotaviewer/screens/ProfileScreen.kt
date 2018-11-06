@@ -3,20 +3,21 @@ package com.vbytsyuk.dotaviewer.screens
 import android.os.Bundle
 import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
-import com.vbytsyuk.dotaviewer.*
+import com.vbytsyuk.dotaviewer.BaseMvpFragment
+import com.vbytsyuk.dotaviewer.BaseMvpPresenter
+import com.vbytsyuk.dotaviewer.BaseMvpViewState
+import com.vbytsyuk.dotaviewer.R
 import com.vbytsyuk.dotaviewer.widgets.StatsView
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.standalone.inject
 
 
-private typealias Data = StatsView.Data
-typealias ProfileViewState = BaseMvpViewState<Data>
+private typealias ProfileData = StatsView.Data
+typealias ProfileViewState = BaseMvpViewState<ProfileData>
 
 
-interface IProfileView : IBaseMvpView<Data>
-
-class ProfileFragment : BaseMvpFragment<Data, IProfileView, ProfilePresenter>(), IProfileView {
+class ProfileFragment : BaseMvpFragment<ProfileData, ProfilePresenter>() {
     override val layout = R.layout.fragment_profile
     override val presenter: ProfilePresenter by viewModel()
 
@@ -27,7 +28,8 @@ class ProfileFragment : BaseMvpFragment<Data, IProfileView, ProfilePresenter>(),
         statsView.setOnClickListener { presenter.loadUserInfo() }
     }
 
-    override fun renderData(data: Data) {
+
+    override fun renderData(data: ProfileData) {
         statsView.bind(data)
     }
 }
@@ -35,8 +37,8 @@ class ProfileFragment : BaseMvpFragment<Data, IProfileView, ProfilePresenter>(),
 
 class ProfilePresenter(
     override var viewState: ProfileViewState
-) : BaseMvpPresenter<Data, IProfileView>(viewState) {
-    val repository: SteamRepository by inject()
+) : BaseMvpPresenter<ProfileData>(viewState) {
+    private val repository: SteamRepository by inject()
 
     fun loadUserInfo() {
         viewState = ProfileViewState(

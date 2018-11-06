@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.*
+import com.vbytsyuk.dotaviewer.navigators.Screen
 import com.vbytsyuk.navigation.Router
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.ext.android.inject
@@ -20,9 +21,7 @@ data class SignInData(
 typealias SignInViewState = BaseMvpViewState<SignInData>
 
 
-interface ISignInView : IBaseMvpView<SignInData>
-
-class SignInFragment : BaseMvpFragment<SignInData, ISignInView, SignInPresenter>(), ISignInView {
+class SignInFragment : BaseMvpFragment<SignInData, SignInPresenter>() {
     override val layout = R.layout.fragment_login
     override val presenter: SignInPresenter by viewModel()
     private val router: Router<Screen> by inject()
@@ -30,12 +29,9 @@ class SignInFragment : BaseMvpFragment<SignInData, ISignInView, SignInPresenter>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         signUp.setOnClickListener {
-            presenter.signUp(
-                login.text.toString(),
-                password.text.toString(),
-                steamId.text.toString()
-            )
+            presenter.signUp(login.inputText, password.inputText, steamId.inputText)
         }
     }
 
@@ -55,24 +51,18 @@ class SignInFragment : BaseMvpFragment<SignInData, ISignInView, SignInPresenter>
 
 class SignInPresenter(
     override var viewState: SignInViewState
-) : BaseMvpPresenter<SignInData, ISignInView>(viewState) {
+) : BaseMvpPresenter<SignInData>(viewState) {
     private val repository: SteamRepository by inject()
 
 
     fun signUp(login: String, password: String, steamId: String) {
         repository.steamID = steamId
-        viewState = SignInViewState(
-            error = viewState.error,
-            data = SignInData(login, password, steamId, isSignInDone = true)
-        )
+        viewState = viewState.copy(data = SignInData(login, password, steamId, isSignInDone = true))
         render()
     }
 
 
     fun clearSignInDone() {
-        viewState = SignInViewState(
-            error = viewState.error,
-            data = viewState.data?.copy(isSignInDone = false)
-        )
+        viewState = viewState.copy(data = viewState.data?.copy(isSignInDone = false))
     }
 }

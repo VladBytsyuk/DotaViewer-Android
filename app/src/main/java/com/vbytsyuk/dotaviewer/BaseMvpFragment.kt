@@ -24,14 +24,14 @@ open class BaseMvpViewState<D>(
             data != null -> BaseMvpStateEnum.Data
             else -> BaseMvpStateEnum.Loading
         }
+
+    fun copy(error: String? = this.error, data: D? = this.data) = BaseMvpViewState(error, data)
 }
 
 
-interface IBaseMvpView<D> : IMvpView<BaseMvpViewState<D>>
-
-abstract class BaseMvpFragment<D, V : IBaseMvpView<D>, P : BaseMvpPresenter<D, V>> :
+abstract class BaseMvpFragment<D, P : BaseMvpPresenter<D>> :
     Fragment(),
-    IBaseMvpView<D> {
+    IMvpView<BaseMvpViewState<D>> {
 
     abstract val layout: Int
     abstract val presenter: P
@@ -46,14 +46,14 @@ abstract class BaseMvpFragment<D, V : IBaseMvpView<D>, P : BaseMvpPresenter<D, V
     @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.takeView(this as V)
+        presenter.takeView(this)
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun onDestroyView() {
         view?.let { (it.parent as ViewGroup).removeAllViews() }
         super.onDestroyView()
-        presenter.dropView(this as V)
+        presenter.dropView(this)
     }
 
 
@@ -79,6 +79,6 @@ abstract class BaseMvpFragment<D, V : IBaseMvpView<D>, P : BaseMvpPresenter<D, V
 }
 
 
-abstract class BaseMvpPresenter<D, V : IBaseMvpView<D>>(
+abstract class BaseMvpPresenter<D>(
     override var viewState: BaseMvpViewState<D>
-) : MvpPresenter<BaseMvpViewState<D>, V>(viewState), KoinComponent
+) : MvpPresenter<BaseMvpViewState<D>>(viewState), KoinComponent

@@ -2,10 +2,13 @@ package com.vbytsyuk.dotaviewer
 
 import android.app.Application
 import com.vbytsyuk.dataprovider.SteamRepository
+import com.vbytsyuk.dotaviewer.navigators.ProfileTabNavigator
+import com.vbytsyuk.dotaviewer.navigators.Screen
 import com.vbytsyuk.dotaviewer.screens.ProfilePresenter
 import com.vbytsyuk.dotaviewer.screens.ProfileViewState
 import com.vbytsyuk.dotaviewer.screens.SignInPresenter
 import com.vbytsyuk.dotaviewer.screens.SignInViewState
+import com.vbytsyuk.dotaviewer.shared_preferences.SharedPreferencesSource
 import com.vbytsyuk.navigation.Router
 import org.koin.android.ext.android.startKoin
 import org.koin.androidx.viewmodel.ext.koin.viewModel

@@ -2,6 +2,8 @@ package com.vbytsyuk.dotaviewer
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.vbytsyuk.dotaviewer.navigators.ProfileTabNavigator
+import com.vbytsyuk.dotaviewer.navigators.Screen
 import com.vbytsyuk.dotaviewer.screens.SignInFragment
 import com.vbytsyuk.navigation.Router
 import kotlinx.android.synthetic.main.activity_main.*
