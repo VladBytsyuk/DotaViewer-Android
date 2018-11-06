@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.vbytsyuk.mvp.IMvpView
 import com.vbytsyuk.mvp.IMvpViewState
 import com.vbytsyuk.mvp.MvpPresenter
+import com.vbytsyuk.navigation.NavigationScreen
 import org.koin.standalone.KoinComponent
 
 
@@ -31,7 +32,8 @@ open class BaseMvpViewState<D>(
 
 abstract class BaseMvpFragment<D, P : BaseMvpPresenter<D>> :
     Fragment(),
-    IMvpView<BaseMvpViewState<D>> {
+    IMvpView<BaseMvpViewState<D>>,
+    NavigationScreen {
 
     abstract val layout: Int
     abstract val presenter: P

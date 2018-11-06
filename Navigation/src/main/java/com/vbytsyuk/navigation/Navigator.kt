@@ -1,7 +1,7 @@
 package com.vbytsyuk.navigation
 
-public interface Navigator<Screen> {
-    public fun apply(command: NavigationCommand<Screen>)
+public interface Navigator {
+    public fun apply(command: NavigationCommand)
 
     class UnsupportedCommandException(message: String) : UnsupportedOperationException(message)
 }

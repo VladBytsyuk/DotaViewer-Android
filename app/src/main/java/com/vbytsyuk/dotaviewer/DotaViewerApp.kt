@@ -3,7 +3,6 @@ package com.vbytsyuk.dotaviewer
 import android.app.Application
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.navigators.ProfileTabNavigator
-import com.vbytsyuk.dotaviewer.navigators.Screen
 import com.vbytsyuk.dotaviewer.screens.ProfilePresenter
 import com.vbytsyuk.dotaviewer.screens.ProfileViewState
 import com.vbytsyuk.dotaviewer.screens.SignInPresenter
@@ -22,7 +21,7 @@ class DotaViewerApp : Application() {
             single { SteamRepository(SharedPreferencesSource()) }
 
             single { ProfileTabNavigator() }
-            single { Router<Screen>() }
+            single { Router() }
 
             viewModel { SignInPresenter(SignInViewState()) }
             viewModel { ProfilePresenter(ProfileViewState()) }

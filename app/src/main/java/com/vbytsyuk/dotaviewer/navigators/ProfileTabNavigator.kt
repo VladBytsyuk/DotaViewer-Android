@@ -2,7 +2,6 @@ package com.vbytsyuk.dotaviewer.navigators
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.vbytsyuk.dotaviewer.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.R
 import com.vbytsyuk.navigation.BackCommand
 import com.vbytsyuk.navigation.ForwardCommand
@@ -10,12 +9,10 @@ import com.vbytsyuk.navigation.NavigationCommand
 import com.vbytsyuk.navigation.Navigator
 
 
-typealias Screen = BaseMvpFragment<*, *>
-
-class ProfileTabNavigator : Navigator<Screen> {
+class ProfileTabNavigator : Navigator {
     var fragmentManager: FragmentManager? = null
 
-    override fun apply(command: NavigationCommand<Screen>) {
+    override fun apply(command: NavigationCommand) {
         when (command) {
             is ForwardCommand -> {
                 val fragment = command.destination as Fragment

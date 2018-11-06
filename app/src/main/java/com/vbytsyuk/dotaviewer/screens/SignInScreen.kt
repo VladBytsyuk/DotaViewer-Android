@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.*
-import com.vbytsyuk.dotaviewer.navigators.Screen
 import com.vbytsyuk.navigation.Router
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.ext.android.inject
@@ -24,7 +23,7 @@ typealias SignInViewState = BaseMvpViewState<SignInData>
 class SignInFragment : BaseMvpFragment<SignInData, SignInPresenter>() {
     override val layout = R.layout.fragment_login
     override val presenter: SignInPresenter by viewModel()
-    private val router: Router<Screen> by inject()
+    private val router: Router by inject()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
