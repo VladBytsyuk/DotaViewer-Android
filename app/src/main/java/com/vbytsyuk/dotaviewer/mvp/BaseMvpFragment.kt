@@ -1,4 +1,4 @@
-package com.vbytsyuk.dotaviewer
+package com.vbytsyuk.dotaviewer.mvp
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -26,7 +26,8 @@ open class BaseMvpViewState<D>(
             else -> BaseMvpStateEnum.Loading
         }
 
-    fun copy(error: String? = this.error, data: D? = this.data) = BaseMvpViewState(error, data)
+    fun copy(error: String? = this.error, data: D? = this.data) =
+        BaseMvpViewState(error, data)
 }
 
 

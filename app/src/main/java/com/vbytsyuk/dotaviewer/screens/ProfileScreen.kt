@@ -3,9 +3,9 @@ package com.vbytsyuk.dotaviewer.screens
 import android.os.Bundle
 import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
-import com.vbytsyuk.dotaviewer.BaseMvpFragment
-import com.vbytsyuk.dotaviewer.BaseMvpPresenter
-import com.vbytsyuk.dotaviewer.BaseMvpViewState
+import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
+import com.vbytsyuk.dotaviewer.mvp.BaseMvpPresenter
+import com.vbytsyuk.dotaviewer.mvp.BaseMvpViewState
 import com.vbytsyuk.dotaviewer.R
 import com.vbytsyuk.dotaviewer.widgets.StatsView
 import kotlinx.android.synthetic.main.fragment_profile.*

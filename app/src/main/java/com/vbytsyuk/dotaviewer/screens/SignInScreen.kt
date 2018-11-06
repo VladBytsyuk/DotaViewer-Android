@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.*
+import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
+import com.vbytsyuk.dotaviewer.mvp.BaseMvpPresenter
+import com.vbytsyuk.dotaviewer.mvp.BaseMvpViewState
 import com.vbytsyuk.navigation.Router
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.koin.android.ext.android.inject
