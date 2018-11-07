@@ -1,8 +1,10 @@
 package com.vbytsyuk.dotaviewer
 
 import android.app.Application
+import com.vbytsyuk.dataprovider.PlayerRepository
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.navigators.ProfileTabNavigator
+import com.vbytsyuk.dotaviewer.network.OpenDotaApiSource
 import com.vbytsyuk.dotaviewer.screens.ProfilePresenter
 import com.vbytsyuk.dotaviewer.screens.ProfileViewState
 import com.vbytsyuk.dotaviewer.screens.SignInPresenter
@@ -30,6 +32,7 @@ class DotaViewerApp : Application() {
     private val dataKoinModule: Module
         get() = module {
             single { SteamRepository(SharedPreferencesSource()) }
+            single { PlayerRepository(OpenDotaApiSource()) }
         }
 
 
