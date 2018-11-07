@@ -16,21 +16,28 @@ import org.koin.dsl.module.module
 
 
 class DotaViewerApp : Application() {
-    private val koinModule: Module
+    private val navigationKoinModule: Module
         get() = module {
-            single { SteamRepository(SharedPreferencesSource()) }
-
             single { ProfileTabNavigator() }
             single { Router() }
+        }
 
+    private val mvpKoinModule: Module
+        get() = module {
             viewModel { SignInPresenter(SignInViewState()) }
             viewModel { ProfilePresenter(ProfileViewState()) }
         }
+    private val dataKoinModule: Module
+        get() = module {
+            single { SteamRepository(SharedPreferencesSource()) }
+        }
+
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        startKoin(this, listOf(koinModule))
+        val koinModulesList = listOf(navigationKoinModule, mvpKoinModule, dataKoinModule)
+        startKoin(this, koinModulesList)
     }
 
     companion object {
