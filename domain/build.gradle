@@ -1,22 +1,18 @@
-apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply plugin: 'java-library'
 
 dependencies {
     ext.kotlin_version = '1.3.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation 'junit:junit:4.12'
-    implementation 'org.testng:testng:6.9.6'
-}
-
-repositories {
-    mavenCentral()
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
 
 sourceCompatibility = "7"
 targetCompatibility = "7"
-
+repositories {
+    mavenCentral()
+}
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.8"

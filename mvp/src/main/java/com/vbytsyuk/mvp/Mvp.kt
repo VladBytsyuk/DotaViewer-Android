@@ -8,18 +8,18 @@ interface IMvpView<in VS : IMvpViewState> {
     fun render(viewState: VS)
 }
 
-abstract class MvpPresenter<VS : IMvpViewState, V : IMvpView<VS>>(
+abstract class MvpPresenter<VS : IMvpViewState>(
     open var viewState: VS
 ) : ViewModel() {
 
-    private var view: V? = null
+    private var view: IMvpView<VS>? = null
 
-    public fun takeView(v: V) {
+    public fun takeView(v: IMvpView<VS>) {
         view = v
         v.render(viewState)
     }
 
-    public fun dropView(v: V) {
+    public fun dropView(v: IMvpView<VS>) {
         if (view == v) {
             view = null
         }

@@ -1,1 +1,1 @@
-include ':app', ':mvp', ':Navigation'
+include ':app', ':mvp', ':Navigation', ':domain', ':dataprovider', ':network', ':database', ':shared_preferences'

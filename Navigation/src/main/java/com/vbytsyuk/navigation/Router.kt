@@ -3,21 +3,23 @@ package com.vbytsyuk.navigation
 import java.util.*
 
 
-internal typealias ScreenWithData<Screen> = Pair<Screen, String?>
+public interface NavigationScreen
+
+internal typealias ScreenWithData = Pair<NavigationScreen, String?>
 
 /**
  * [Router] is an adapter between user calls and the platform’s navigation system,
  * implemented in [Navigator]
- * [Screen] is platform's type that represents application screen
+ * [NavigationScreen] is platform's type that represents application screen
  */
-public open class Router<Screen> {
-    private val screenStack: Stack<ScreenWithData<Screen>> = Stack()
-    private val commandBuffer: CommandBuffer<Screen> = CommandBuffer()
+public open class Router {
+    private val screenStack: Stack<ScreenWithData> = Stack()
+    private val commandBuffer: CommandBuffer = CommandBuffer()
 
     /**
      * Platform-based implementation of [Navigator] interface
      */
-    public var navigator: Navigator<Screen>?
+    public var navigator: Navigator?
         public set(new) {
             commandBuffer.navigator = new
         }
@@ -28,7 +30,7 @@ public open class Router<Screen> {
      * Wrapper for [ForwardCommand]
      */
     public fun navigateTo(
-        destination: Screen,
+        destination: NavigationScreen,
         data: String? = null
     ) {
         screenStack.push(destination to data)
