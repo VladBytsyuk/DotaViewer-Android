@@ -2,21 +2,29 @@ package com.vbytsyuk.dotaviewer
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.vbytsyuk.dotaviewer.navigators.ProfileTabNavigator
+import com.vbytsyuk.dotaviewer.navigators.AppNavigator
 import com.vbytsyuk.dotaviewer.screens.SignInFragment
 import com.vbytsyuk.navigation.Router
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class MainActivity : FragmentActivity() {
-    private val navigator: ProfileTabNavigator by inject()
-    private val router: Router by inject()
+    private val navigator: AppNavigator by inject()
+    private val router: Router<AppScreen> by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navigation.setOnNavigationItemSelectedListener { true }
+        navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.tab_profile -> router.changeTab(AppNavigator.AppTab.Profile)
+                R.id.tab_pro -> router.changeTab(AppNavigator.AppTab.Pro)
+                R.id.tab_settings -> router.changeTab(AppNavigator.AppTab.Settings)
+                else -> return@setOnNavigationItemSelectedListener false
+            }
+            true
+        }
     }
 
     override fun onStart() {

@@ -40,3 +40,5 @@ fun SharedPreferences.put(key: String, value: Any) = edit().run {
     }
     apply()
 }
+
+val Any.name: String get() = javaClass.name
