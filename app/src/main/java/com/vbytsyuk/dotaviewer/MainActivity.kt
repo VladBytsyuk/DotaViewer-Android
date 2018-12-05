@@ -33,4 +33,12 @@ class MainActivity : FragmentActivity() {
         router.navigator = navigator
         router.navigateTo(SignInFragment())
     }
+
+    override fun onBackPressed() {
+        if (navigator.activeTabStack.size > 1) {
+            router.back()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

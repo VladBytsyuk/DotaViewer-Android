@@ -25,7 +25,6 @@ class AppNavigator(
         val fragment = activeScreen as Fragment
         fragmentManager?.beginTransaction()?.run {
             replace(R.id.fragmentContainer, fragment, fragment.name)
-            addToBackStack(null)
             commit()
         }
     }
