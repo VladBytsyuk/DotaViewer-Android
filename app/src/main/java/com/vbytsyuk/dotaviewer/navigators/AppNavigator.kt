@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.vbytsyuk.dotaviewer.AppScreen
 import com.vbytsyuk.dotaviewer.R
-import com.vbytsyuk.dotaviewer.name
+import com.vbytsyuk.dotaviewer.replace
 import com.vbytsyuk.navigation.NavigationCommand
 import com.vbytsyuk.navigation.Navigator
 import com.vbytsyuk.navigation.Tab
@@ -23,9 +23,6 @@ class AppNavigator(
 
     override fun apply(command: NavigationCommand<AppScreen>) {
         val fragment = activeScreen as Fragment
-        fragmentManager?.beginTransaction()?.run {
-            replace(R.id.fragmentContainer, fragment, fragment.name)
-            commit()
-        }
+        fragmentManager?.replace(R.id.fragmentContainer, fragment)
     }
 }
