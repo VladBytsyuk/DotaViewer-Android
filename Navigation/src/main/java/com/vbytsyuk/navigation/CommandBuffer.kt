@@ -11,7 +11,7 @@ internal class CommandBuffer<Screen> {
         internal set(new) {
             field = new
             field?.let { navigator ->
-                while (queue.isNotEmpty()) navigator.apply(queue.poll())
+                while (queue.isNotEmpty()) navigator.baseApply(queue.poll())
             }
         }
 
@@ -19,7 +19,7 @@ internal class CommandBuffer<Screen> {
     internal fun execute(command: NavigationCommand<Screen>) {
         val lockedNavigator: Navigator<Screen>? = navigator
         if (lockedNavigator != null) {
-            lockedNavigator.apply(command)
+            lockedNavigator.baseApply(command)
         } else {
             queue.add(command)
         }

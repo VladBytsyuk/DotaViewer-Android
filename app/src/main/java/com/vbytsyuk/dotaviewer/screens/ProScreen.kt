@@ -13,13 +13,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.standalone.inject
 
 
-typealias ProfileData = StatsView.Data
-typealias ProfileViewState = BaseMvpViewState<ProfileData>
+typealias ProViewState = BaseMvpViewState<ProfileData>
 
-
-class ProfileFragment : BaseMvpFragment<ProfileData, ProfilePresenter>() {
+class ProFragment : BaseMvpFragment<ProfileData, ProPresenter>() {
     override val layout = R.layout.fragment_profile
-    override val presenter: ProfilePresenter by viewModel()
+    override val presenter: ProPresenter by viewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,9 +31,7 @@ class ProfileFragment : BaseMvpFragment<ProfileData, ProfilePresenter>() {
         statsView.bind(data)
     }
 }
-
-
-class ProfilePresenter(
+class ProPresenter(
     override var viewState: ProfileViewState
 ) : BaseMvpPresenter<ProfileData>(viewState) {
     private val repository: SteamRepository by inject()
@@ -45,7 +41,7 @@ class ProfilePresenter(
             error = null,
             data = StatsView.Data(
                 avatarUrl = "",
-                name = "Alan Turing",
+                name = "Albus Dumbledore",
                 rank = repository.steamID,
                 time = "10000 hours",
                 winrate = "69% winrate",

@@ -9,8 +9,8 @@ internal enum class MockTab : Tab { First, Second }
 
 internal class MockNavigator(
     val app: MockApp,
-    tabs: List<Tab> = listOf(TabStub())
-) : Navigator<MockScreen>(tabs) {
+    tabsToRoot: Map<Tab, MockScreen> = mapOf(TabStub() to MockScreen("Root"))
+) : Navigator<MockScreen>(tabsToRoot) {
     override fun apply(command: NavigationCommand<MockScreen>) {
         when (command) {
             is ForwardCommand -> activeTabStack.push(command.destination as MockScreen)
@@ -27,11 +27,15 @@ internal class MockApp(isMultipleTabs: Boolean = false) {
     val router: Router<MockScreen> = Router()
 
     init {
-        val tabsList = MockTab.values().toList()
-        val navigator = if (isMultipleTabs)
-            MockNavigator(app = this, tabs = tabsList)
-        else
+        val tabsToRoot = mapOf(
+            MockTab.First as Tab to MockScreen("First root"),
+            MockTab.Second as Tab to MockScreen("Second root")
+        )
+        val navigator = if (isMultipleTabs) {
+            MockNavigator(app = this, tabsToRoot = tabsToRoot)
+        } else {
             MockNavigator(app = this)
+        }
         router.navigator = navigator
 
     }

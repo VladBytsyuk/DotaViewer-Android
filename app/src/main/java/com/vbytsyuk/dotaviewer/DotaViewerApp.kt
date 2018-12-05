@@ -4,10 +4,7 @@ import android.app.Application
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.navigators.AppNavigator
-import com.vbytsyuk.dotaviewer.screens.ProfilePresenter
-import com.vbytsyuk.dotaviewer.screens.ProfileViewState
-import com.vbytsyuk.dotaviewer.screens.SignInPresenter
-import com.vbytsyuk.dotaviewer.screens.SignInViewState
+import com.vbytsyuk.dotaviewer.screens.*
 import com.vbytsyuk.dotaviewer.shared_preferences.SharedPreferencesSource
 import com.vbytsyuk.navigation.Router
 import org.koin.android.ext.android.startKoin
@@ -20,7 +17,13 @@ typealias AppScreen = BaseMvpFragment<*, *>
 class DotaViewerApp : Application() {
     private val navigationKoinModule: Module
         get() = module {
-            single { AppNavigator() }
+            single {
+                AppNavigator(
+                    AppNavigator.AppTab.Profile to SignInFragment(),
+                    AppNavigator.AppTab.Pro to ProFragment(),
+                    AppNavigator.AppTab.Settings to SignInFragment()
+                )
+            }
             single { Router<AppScreen>() }
         }
 
@@ -28,6 +31,7 @@ class DotaViewerApp : Application() {
         get() = module {
             viewModel { SignInPresenter(SignInViewState()) }
             viewModel { ProfilePresenter(ProfileViewState()) }
+            viewModel { ProPresenter(ProViewState()) }
         }
 
     private val dataKoinModule: Module
