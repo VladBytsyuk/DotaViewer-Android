@@ -6,7 +6,9 @@
     
     <color name="base">#2D2D2D</color>
     <color name="good">#4CAF50</color>
+    <color name="good_dark">#B82D7E32</color>
     <color name="bad">#C62828</color>
 
     <color name="not_loaded">#2D2D2D2D</color>
+    <color name="white">#ffffff</color>
 </resources>

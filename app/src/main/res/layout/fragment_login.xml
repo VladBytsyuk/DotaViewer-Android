@@ -2,27 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/signInTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
 
-        android:text="Sign In"
+        android:text="Sign in"
         android:textColor="#000000"
-        android:textSize="32sp"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
 
-        app:layout_constraintBottom_toTopOf="@+id/loginLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/signInInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="4dp"
+
+        android:text="with Steam ID"
+        android:alpha="0.72"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signInTitle"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/loginLayout"
@@ -32,12 +51,12 @@
         android:layout_margin="16dp"
 
         android:hint="@string/sign_in_hint_email"
+        app:boxStrokeColor="@color/good"
 
-        app:layout_constraintBottom_toTopOf="@+id/passwordLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInTitle">
+        app:layout_constraintTop_toBottomOf="@+id/signInInfo">
 
         <EditText
             android:id="@+id/login"
@@ -55,7 +74,6 @@
 
         android:hint="@string/sign_in_hint_password"
 
-        app:layout_constraintBottom_toTopOf="@+id/steamIdLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,13 +98,12 @@
 
         android:hint="@string/sign_in_hint_steam_id"
 
-        app:layout_constraintBottom_toTopOf="@+id/signUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout">
 
         <EditText
+            colo
             android:id="@+id/steamId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -102,6 +119,8 @@
         android:layout_margin="16dp"
 
         android:text="Sign In"
+        android:textColor="@color/white"
+        android:background="@color/good_dark"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
