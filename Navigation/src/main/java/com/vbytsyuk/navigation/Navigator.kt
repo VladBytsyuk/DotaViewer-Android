@@ -16,16 +16,14 @@ public abstract class Navigator<Screen>(tabsToRoot: Map<Tab, Screen>) {
         get() = tabStacks[activeTab]
             ?: throw IllegalTabException("No such tab = [$activeTab] registered in Router.")
 
-    val activeScreen: Screen?
-        get() = if (activeTabStack.isNotEmpty()) activeTabStack.peek() else null
+    val activeScreen: Screen get() = activeTabStack.peek()
 
 
     internal fun baseApply(command: NavigationCommand<Screen>) {
         when (command) {
-            is ForwardCommand -> activeTabStack.push(command.destination!!)
-            is BackCommand -> activeTabStack.pop()
+            is ForwardCommand -> activeTabStack.push(command.destination)
+            is BackCommand -> if (activeTabStack.size > 1) activeTabStack.pop()
             is ChangeTabCommand -> activeTab = command.tab
-            else -> throw Navigator.UnsupportedCommandException("No such command")
         }
         apply(command)
     }
