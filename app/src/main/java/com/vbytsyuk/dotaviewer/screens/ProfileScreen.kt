@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import com.vbytsyuk.dataprovider.PlayerRepository
 import com.vbytsyuk.dataprovider.SteamRepository
+import com.vbytsyuk.domain.Player
 import com.vbytsyuk.dotaviewer.R
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpPresenter
@@ -47,21 +48,23 @@ class ProfilePresenter(
 
     fun loadUserInfo() = CoroutineScope(Dispatchers.IO).launch {
         val player = playerRepository.getPlayer(steamRepository.steamID)
-        withContext(Dispatchers.Main) {
-            Log.d("Player", player.toString())
-            viewState = ProfileViewState(
-                error = null,
-                data = StatsView.Data(
-                    avatarUrl = player.profile?.avatarMedium ?: "",
-                    name = player.profile?.personName ?: "",
-                    rank = player.mmrEstimate?.estimate.toString(),
-                    time = player.trackedUntil ?: "",
-                    winrate = player.rankTier.toString(),
-                    kda = player.leaderboardRank.toString()
-                )
+        withContext(Dispatchers.Main) { updatePlayer(player) }
+    }
+
+    private fun updatePlayer(player: Player) {
+        Log.d("Player", player.toString())
+        viewState = ProfileViewState(
+            error = null,
+            data = StatsView.Data(
+                avatarUrl = player.profile?.avatarMedium ?: "",
+                name = player.profile?.personName ?: "",
+                rank = player.mmrEstimate?.estimate.toString(),
+                time = player.trackedUntil ?: "",
+                winrate = player.rankTier.toString(),
+                kda = player.leaderboardRank.toString()
             )
-            render()
-        }
+        )
+        render()
     }
 
 }

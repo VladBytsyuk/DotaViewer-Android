@@ -7,7 +7,6 @@ import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.navigators.AppNavigator
 import com.vbytsyuk.dotaviewer.network.OpenDotaApiSource
 import com.vbytsyuk.dotaviewer.screens.*
-import com.vbytsyuk.dotaviewer.shared_preferences.SharedPreferencesSource
 import com.vbytsyuk.navigation.Router
 import org.koin.android.ext.android.startKoin
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -38,7 +37,7 @@ class DotaViewerApp : Application() {
 
     private val dataKoinModule: Module
         get() = module {
-            single { SteamRepository(SharedPreferencesSource()) }
+            single { SteamRepository(StubSource()) }
             single { PlayerRepository(OpenDotaApiSource()) }
         }
 
