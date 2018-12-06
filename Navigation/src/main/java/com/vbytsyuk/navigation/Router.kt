@@ -1,47 +1,38 @@
 package com.vbytsyuk.navigation
 
-import java.util.*
+/**
+ * Marker interface for entities that represents navigation tabs.
+ */
+interface Tab
 
-
-public interface NavigationScreen
-
-internal typealias ScreenWithData = Pair<NavigationScreen, String?>
 
 /**
  * [Router] is an adapter between user calls and the platform’s navigation system,
  * implemented in [Navigator]
- * [NavigationScreen] is platform's type that represents application screen
  */
-public open class Router {
-    private val screenStack: Stack<ScreenWithData> = Stack()
-    private val commandBuffer: CommandBuffer = CommandBuffer()
+open class Router<Screen> {
+    private val commandBuffer: CommandBuffer<Screen> = CommandBuffer()
+
 
     /**
      * Platform-based implementation of [Navigator] interface
      */
-    public var navigator: Navigator?
-        public set(new) {
-            commandBuffer.navigator = new
+    var navigator: Navigator<Screen>?
+        get() = commandBuffer.navigator
+        set(value) {
+            commandBuffer.navigator = value
         }
-        public get() = commandBuffer.navigator
 
 
-    /**
-     * Wrapper for [ForwardCommand]
-     */
-    public fun navigateTo(
-        destination: NavigationScreen,
+    fun navigateTo(
+        destination: Screen,
         data: String? = null
-    ) {
-        screenStack.push(destination to data)
-        commandBuffer.execute(ForwardCommand(destination, data))
-    }
+    ) = ForwardCommand(destination, data).execute()
 
-    /**
-     * Wrapper for [BackCommand]
-     */
-    public fun back() {
-        screenStack.pop()
-        commandBuffer.execute(BackCommand())
-    }
+    fun back() = BackCommand<Screen>().execute()
+
+    fun changeTab(tab: Tab) = ChangeTabCommand<Screen>(tab).execute()
+
+
+    private fun NavigationCommand<Screen>.execute() = commandBuffer.execute(this)
 }

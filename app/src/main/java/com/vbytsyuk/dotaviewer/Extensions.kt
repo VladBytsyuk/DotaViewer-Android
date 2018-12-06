@@ -7,6 +7,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 val appContext: Context get() = DotaViewerApp.instance.applicationContext
 
@@ -40,3 +43,19 @@ fun SharedPreferences.put(key: String, value: Any) = edit().run {
     }
     apply()
 }
+
+
+fun FragmentManager.replace(
+    containerViewId: Int, fragment: Fragment
+) = transaction { replaceWithTag(containerViewId, fragment) }
+
+fun FragmentManager.transaction(
+    action: FragmentTransaction.() -> FragmentTransaction
+) = beginTransaction().action().commit()
+
+fun FragmentTransaction.replaceWithTag(
+    containerViewId: Int, fragment: Fragment
+) = replace(containerViewId, fragment, fragment.tag)
+
+
+val Any.tag: String get() = javaClass.name
