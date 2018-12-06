@@ -1,19 +1,24 @@
 package com.vbytsyuk.navigation
 
-public open class NavigationCommand(
-    val destination: NavigationScreen? = null,
-    val data: String? = null
-)
+interface NavigationCommand<out Screen>
+
 
 /**
  * Direct transition to [destination] screen with [data]
  */
-public final class ForwardCommand(
-    destination: NavigationScreen,
-    data: String? = null
-) : NavigationCommand(destination, data)
+data class ForwardCommand<out Screen>(
+    val destination: Screen,
+    val data: String? = null
+) : NavigationCommand<Screen>
+
 
 /**
  * Return to previous screen
  */
-public final class BackCommand : NavigationCommand()
+class BackCommand<out Screen> : NavigationCommand<Screen>
+
+
+/**
+ * Change tab with screens to [tab]
+ */
+data class ChangeTabCommand<out Screen>(val tab: Tab) : NavigationCommand<Screen>

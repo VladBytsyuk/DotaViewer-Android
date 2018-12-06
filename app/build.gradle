@@ -32,17 +32,17 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':mvp')
-    implementation project(path: ':Navigation')
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13'
 
     //Support library
-    implementation 'androidx.appcompat:appcompat:1.0.1'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+
+    //Android KTX
+    implementation 'androidx.core:core-ktx:1.0.1'
 
     //Arch components
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
@@ -67,6 +67,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+    //Modules
+    implementation project(path: ':mvp')
+    implementation project(path: ':Navigation')
     implementation project(path: ':dataprovider')
     implementation project(path: ':domain')
 }

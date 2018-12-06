@@ -1,29 +1,44 @@
 package com.vbytsyuk.navigation.test
 
 import com.vbytsyuk.navigation.*
-import java.util.*
 
-internal data class MockScreen(val name: String) : NavigationScreen
+internal data class MockScreen(val name: String)
 
-internal class MockNavigator(val app: MockApp) : Navigator {
-    override fun apply(command: NavigationCommand) {
+internal enum class MockTab : Tab { First, Second }
+
+
+internal class MockNavigator(
+    val app: MockApp,
+    tabsToRoot: Map<Tab, MockScreen> = mapOf(TabStub() to MockScreen("Root"))
+) : Navigator<MockScreen>(tabsToRoot) {
+    override fun apply(command: NavigationCommand<MockScreen>) {
         when (command) {
-            is ForwardCommand -> app.screenStack.push(command.destination as MockScreen)
-            is BackCommand -> app.screenStack.pop()
+            is ForwardCommand -> activeTabStack.push(command.destination as MockScreen)
+            is BackCommand -> activeTabStack.pop()
+            is ChangeTabCommand -> activeTab = command.tab
             else -> throw Navigator.UnsupportedCommandException("No such command")
         }
+        app.currentScreen = activeScreen
     }
 }
 
-internal class MockApp {
-    val router: Router = Router()
+
+internal class MockApp(isMultipleTabs: Boolean = false) {
+    val router: Router<MockScreen> = Router()
 
     init {
-        router.navigator = MockNavigator(this)
+        val tabsToRoot = mapOf(
+            MockTab.First as Tab to MockScreen("First root"),
+            MockTab.Second as Tab to MockScreen("Second root")
+        )
+        val navigator = if (isMultipleTabs) {
+            MockNavigator(app = this, tabsToRoot = tabsToRoot)
+        } else {
+            MockNavigator(app = this)
+        }
+        router.navigator = navigator
+
     }
 
-    internal var screenStack: Stack<MockScreen> = Stack()
-
-    val currentScreen: MockScreen?
-        get() = if (screenStack.isNotEmpty()) screenStack.peek() else null
+    var currentScreen: MockScreen? = null
 }

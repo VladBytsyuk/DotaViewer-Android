@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.standalone.inject
 
 
-private typealias ProfileData = StatsView.Data
+typealias ProfileData = StatsView.Data
 typealias ProfileViewState = BaseMvpViewState<ProfileData>
 
 

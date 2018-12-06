@@ -3,7 +3,9 @@ package com.vbytsyuk.dotaviewer.screens
 import android.os.Bundle
 import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
-import com.vbytsyuk.dotaviewer.*
+import com.vbytsyuk.dotaviewer.AppScreen
+import com.vbytsyuk.dotaviewer.R
+import com.vbytsyuk.dotaviewer.inputText
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpPresenter
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpViewState
@@ -26,7 +28,7 @@ typealias SignInViewState = BaseMvpViewState<SignInData>
 class SignInFragment : BaseMvpFragment<SignInData, SignInPresenter>() {
     override val layout = R.layout.fragment_login
     override val presenter: SignInPresenter by viewModel()
-    private val router: Router by inject()
+    private val router: Router<AppScreen> by inject()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
