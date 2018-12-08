@@ -2,7 +2,6 @@ package com.vbytsyuk.dotaviewer.widgets
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
@@ -19,8 +18,7 @@ class StatsView @JvmOverloads constructor(
     private val textViews: List<TextView>
 
     init {
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.view_stats, this, true)
+        inflate(context, layoutId = R.layout.view_stats)
         textViews = listOf(name, rank, time, winrate, kda)
     }
 

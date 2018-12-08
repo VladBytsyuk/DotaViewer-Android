@@ -5,7 +5,6 @@ import android.view.View
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.AppScreen
 import com.vbytsyuk.dotaviewer.R
-import com.vbytsyuk.dotaviewer.inputText
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpPresenter
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpViewState
@@ -35,15 +34,15 @@ class SignInFragment : BaseMvpFragment<SignInData, SignInPresenter>() {
         super.onViewCreated(view, savedInstanceState)
 
         signUp.setOnClickListener {
-            presenter.signUp(login.inputText, password.inputText, steamId.inputText)
+            presenter.signUp(login.text, password.text, steamId.text)
         }
     }
 
 
     override fun renderData(data: SignInData) {
-        login.setText(data.email)
-        password.setText(data.password)
-        steamId.setText(data.steamId)
+        login.text = data.email
+        password.text = data.password
+        steamId.text = data.steamId
 
         if (data.isSignInDone) {
             router.navigateTo(ProfileFragment())

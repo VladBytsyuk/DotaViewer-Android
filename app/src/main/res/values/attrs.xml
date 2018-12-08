@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedEditText">
+        <attr name="ret_icon" format="integer"/>
+        <attr name="ret_hint" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="EditField">
+        <attr name="ef_icon" format="integer"/>
+        <attr name="ef_hint" format="string"/>
+    </declare-styleable>
+</resources>
