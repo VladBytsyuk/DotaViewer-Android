@@ -6,7 +6,7 @@
     
     <color name="base">#2D2D2D</color>
     <color name="base_72">#B82D2D2D</color>
-    <color name="gray">#F1F1F1</color>
+    <color name="gray">#DCDCDC</color>
     <color name="good">#4CAF50</color>
     <color name="good_dark">#B82D7E32</color>
     <color name="bad">#C62828</color>
