@@ -4,7 +4,7 @@ import android.app.Application
 import com.vbytsyuk.dataprovider.PlayerRepository
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
-import com.vbytsyuk.dotaviewer.navigators.AppNavigator
+import com.vbytsyuk.dotaviewer.navigators.FragmentNavigator
 import com.vbytsyuk.dotaviewer.network.OpenDotaApiSource
 import com.vbytsyuk.dotaviewer.screens.*
 import com.vbytsyuk.navigation.Router
@@ -19,10 +19,10 @@ class DotaViewerApp : Application() {
     private val navigationKoinModule: Module
         get() = module {
             single {
-                AppNavigator(
-                    AppNavigator.AppTab.Profile to SignInFragment(),
-                    AppNavigator.AppTab.Pro to ProFragment(),
-                    AppNavigator.AppTab.Settings to SignInFragment()
+                FragmentNavigator(
+                    FragmentNavigator.AppTab.Profile to SignInFragment(),
+                    FragmentNavigator.AppTab.Pro to ProFragment(),
+                    FragmentNavigator.AppTab.Settings to SignInFragment()
                 )
             }
             single { Router<AppScreen>() }
