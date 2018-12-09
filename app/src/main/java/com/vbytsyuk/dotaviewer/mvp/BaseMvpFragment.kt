@@ -52,7 +52,7 @@ abstract class BaseMvpFragment<D, P : BaseMvpPresenter<D>> :
 
     @Suppress("UNCHECKED_CAST")
     override fun onDestroyView() {
-        view?.let { (it.parent as ViewGroup).removeAllViews() }
+        view?.parent?.let { (it as ViewGroup).removeAllViews() }
         super.onDestroyView()
         presenter.dropView(this)
     }
