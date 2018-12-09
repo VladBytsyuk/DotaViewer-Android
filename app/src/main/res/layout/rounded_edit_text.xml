@@ -36,6 +36,7 @@
 
         tools:src="@drawable/ic_person"
         android:tint="@color/base"
+        android:alpha="0.72"
         android:contentDescription="@string/content_description_edit_text_field_icon"
 
         app:layout_constraintStart_toStartOf="parent"
