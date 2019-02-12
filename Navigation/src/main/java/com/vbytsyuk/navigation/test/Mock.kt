@@ -1,6 +1,9 @@
 package com.vbytsyuk.navigation.test
 
-import com.vbytsyuk.navigation.*
+import com.vbytsyuk.navigation.NavigationCommand
+import com.vbytsyuk.navigation.Navigator
+import com.vbytsyuk.navigation.Router
+import com.vbytsyuk.navigation.Tab
 
 internal data class MockScreen(val name: String)
 
@@ -13,9 +16,9 @@ internal class MockNavigator(
 ) : Navigator<MockScreen>(tabsToRoot) {
     override fun apply(command: NavigationCommand<MockScreen>) {
         when (command) {
-            is ForwardCommand -> activeTabStack.push(command.destination as MockScreen)
-            is BackCommand -> activeTabStack.pop()
-            is ChangeTabCommand -> activeTab = command.tab
+            is NavigationCommand.Forward -> activeTabStack.push(command.destination)
+            is NavigationCommand.Back -> activeTabStack.pop()
+            is NavigationCommand.ChangeTabCommand -> activeTab = command.tab
             else -> throw Navigator.UnsupportedCommandException("No such command")
         }
         app.currentScreen = activeScreen

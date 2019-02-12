@@ -2,111 +2,103 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/signInTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:layout_margin="16dp"
         android:layout_marginTop="48dp"
 
-        android:text="Sign In"
+        android:text="Sign in"
         android:textColor="#000000"
-        android:textSize="32sp"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
 
-        app:layout_constraintBottom_toTopOf="@+id/loginLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginLayout"
+
+    <TextView
+        android:id="@+id/signInInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
 
-        android:hint="@string/sign_in_hint_email"
+        android:text="with Steam ID"
+        android:alpha="0.72"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:includeFontPadding="false"
 
-        app:layout_constraintBottom_toTopOf="@+id/passwordLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInTitle">
+        app:layout_constraintTop_toBottomOf="@+id/signInTitle"/>
 
-        <EditText
-            android:id="@+id/login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordLayout"
+    <com.vbytsyuk.dotaviewer.widgets.EditField
+        android:id="@+id/login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
 
-        android:hint="@string/sign_in_hint_password"
+        app:ef_hint="@string/sign_in_hint_email"
+        app:ef_icon="@drawable/ic_person"
 
-        app:layout_constraintBottom_toTopOf="@+id/steamIdLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginLayout">
+        app:layout_constraintTop_toBottomOf="@+id/signInInfo"/>
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:ems="10"
-            android:inputType="textPassword"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/steamIdLayout"
+    <com.vbytsyuk.dotaviewer.widgets.EditField
+        android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:layout_margin="16dp"
+        app:ef_hint="@string/sign_in_hint_password"
+        app:ef_icon="@drawable/ic_lock"
 
-        android:hint="@string/sign_in_hint_steam_id"
-
-        app:layout_constraintBottom_toTopOf="@+id/signUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLayout">
+        app:layout_constraintTop_toBottomOf="@+id/login"/>
 
-        <EditText
-            android:id="@+id/steamId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <com.vbytsyuk.dotaviewer.widgets.EditField
+        android:id="@+id/steamId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
 
-    </com.google.android.material.textfield.TextInputLayout>
+        app:ef_hint="@string/sign_in_hint_steam_id"
+        app:ef_icon="@drawable/ic_steam"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"/>
 
     <Button
         android:id="@+id/signUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minHeight="64dp"
+        android:layout_width="256dp"
+        android:layout_height="48dp"
 
-        android:layout_margin="16dp"
+        android:layout_marginTop="32dp"
 
-        android:text="Sign In"
+        android:text="Sign in"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textAllCaps="false"
+        android:letterSpacing="0.0357"
+        android:background="@drawable/rounded_button_green"
 
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/steamIdLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/steamId"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

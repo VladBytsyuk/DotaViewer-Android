@@ -27,11 +27,11 @@ open class Router<Screen> {
     fun navigateTo(
         destination: Screen,
         data: String? = null
-    ) = ForwardCommand(destination, data).execute()
+    ) = NavigationCommand.Forward(destination, data).execute()
 
-    fun back() = BackCommand<Screen>().execute()
+    fun back() = NavigationCommand.Back.execute()
 
-    fun changeTab(tab: Tab) = ChangeTabCommand<Screen>(tab).execute()
+    fun changeTab(tab: Tab) = NavigationCommand.ChangeTabCommand<Screen>(tab).execute()
 
 
     private fun NavigationCommand<Screen>.execute() = commandBuffer.execute(this)

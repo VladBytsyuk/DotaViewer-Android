@@ -4,13 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.vbytsyuk.dotaviewer.AppScreen
 import com.vbytsyuk.dotaviewer.R
-import com.vbytsyuk.dotaviewer.replace
 import com.vbytsyuk.navigation.NavigationCommand
 import com.vbytsyuk.navigation.Navigator
 import com.vbytsyuk.navigation.Tab
 
 
-class AppNavigator(
+class FragmentNavigator(
     tabsToRoot: Map<AppTab, AppScreen>
 ) : Navigator<AppScreen>(tabsToRoot.map { (it.key as Tab) to it.value }.toMap()) {
 
@@ -18,11 +17,26 @@ class AppNavigator(
 
     enum class AppTab : Tab { Profile, Pro, Settings }
 
-
     var fragmentManager: FragmentManager? = null
 
+    private val activeFragment: Fragment get() = activeScreen
+
+
     override fun apply(command: NavigationCommand<AppScreen>) {
-        val fragment = activeScreen as Fragment
-        fragmentManager?.replace(R.id.fragmentContainer, fragment)
+        changeFragment(activeFragment, command.animation)
     }
+
+    fun initScreen() = changeFragment(activeFragment)
+
+
+    private fun changeFragment(newFragment: Fragment, animation: FragmentAnimation? = null) =
+        fragmentManager?.changeFragment(R.id.fragmentContainer, newFragment, animation)
+
+
+    private val NavigationCommand<AppScreen>.animation: FragmentAnimation?
+        get() = when (this) {
+            is NavigationCommand.Forward -> FragmentAnimation.Forward
+            is NavigationCommand.Back -> FragmentAnimation.Back
+            else -> null
+        }
 }

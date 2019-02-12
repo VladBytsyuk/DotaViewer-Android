@@ -12,7 +12,11 @@
     <string name="stats_view_kda_default">⠀⠀⠀⠀⠀⠀⠀⠀⠀</string>
 
     <string name="error_text_empty_data">Error in server response. Empty data.</string>
+
     <string name="sign_in_hint_email">E-mail</string>
     <string name="sign_in_hint_password">Password</string>
     <string name="sign_in_hint_steam_id">Steam ID</string>
+
+    <string name="content_description_edit_text_field">Edit text field</string>
+    <string name="content_description_edit_text_field_icon">Edit text field icon</string>
 </resources>

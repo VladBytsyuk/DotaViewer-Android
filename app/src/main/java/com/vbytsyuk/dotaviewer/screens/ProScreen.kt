@@ -6,17 +6,17 @@ import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.R
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpPresenter
-import com.vbytsyuk.dotaviewer.mvp.BaseMvpViewState
+import com.vbytsyuk.dotaviewer.mvp.ViewState
 import com.vbytsyuk.dotaviewer.widgets.StatsView
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.standalone.inject
 
 
-typealias ProViewState = BaseMvpViewState<ProfileData>
+typealias ProViewState = ViewState<ProfileData>
 
 class ProFragment : BaseMvpFragment<ProfileData, ProPresenter>() {
-    override val layout = R.layout.fragment_profile
+    override val layoutId = R.layout.fragment_profile
     override val presenter: ProPresenter by viewModel()
 
 
@@ -31,15 +31,16 @@ class ProFragment : BaseMvpFragment<ProfileData, ProPresenter>() {
         statsView.bind(data)
     }
 }
+
+
 class ProPresenter(
-    override var viewState: ProfileViewState
+    override var viewState: ViewState<ProfileData> = ViewState.Loading
 ) : BaseMvpPresenter<ProfileData>(viewState) {
     private val repository: SteamRepository by inject()
 
     fun loadUserInfo() {
-        viewState = ProfileViewState(
-            error = null,
-            data = StatsView.Data(
+        renderData(
+            StatsView.Data(
                 avatarUrl = "",
                 name = "Albus Dumbledore",
                 rank = repository.steamID,
@@ -48,6 +49,5 @@ class ProPresenter(
                 kda = "KDA: 42"
             )
         )
-        render()
     }
 }

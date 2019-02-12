@@ -1,11 +1,12 @@
 package com.vbytsyuk.dotaviewer
 
 import android.app.Application
+import com.vbytsyuk.dataprovider.PlayerRepository
 import com.vbytsyuk.dataprovider.SteamRepository
 import com.vbytsyuk.dotaviewer.mvp.BaseMvpFragment
-import com.vbytsyuk.dotaviewer.navigators.AppNavigator
+import com.vbytsyuk.dotaviewer.navigators.FragmentNavigator
+import com.vbytsyuk.dotaviewer.network.OpenDotaApiSource
 import com.vbytsyuk.dotaviewer.screens.*
-import com.vbytsyuk.dotaviewer.shared_preferences.SharedPreferencesSource
 import com.vbytsyuk.navigation.Router
 import org.koin.android.ext.android.startKoin
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -18,10 +19,10 @@ class DotaViewerApp : Application() {
     private val navigationKoinModule: Module
         get() = module {
             single {
-                AppNavigator(
-                    AppNavigator.AppTab.Profile to SignInFragment(),
-                    AppNavigator.AppTab.Pro to ProFragment(),
-                    AppNavigator.AppTab.Settings to SignInFragment()
+                FragmentNavigator(
+                    FragmentNavigator.AppTab.Profile to SignInFragment(),
+                    FragmentNavigator.AppTab.Pro to ProFragment(),
+                    FragmentNavigator.AppTab.Settings to SignInFragment()
                 )
             }
             single { Router<AppScreen>() }
@@ -29,14 +30,15 @@ class DotaViewerApp : Application() {
 
     private val mvpKoinModule: Module
         get() = module {
-            viewModel { SignInPresenter(SignInViewState()) }
-            viewModel { ProfilePresenter(ProfileViewState()) }
-            viewModel { ProPresenter(ProViewState()) }
+            viewModel { SignInPresenter() }
+            viewModel { ProfilePresenter() }
+            viewModel { ProPresenter() }
         }
 
     private val dataKoinModule: Module
         get() = module {
-            single { SteamRepository(SharedPreferencesSource()) }
+            single { SteamRepository(StubSource()) }
+            single { PlayerRepository(OpenDotaApiSource()) }
         }
 
 
