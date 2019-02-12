@@ -4,7 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.vbytsyuk.dotaviewer.AppScreen
 import com.vbytsyuk.dotaviewer.R
-import com.vbytsyuk.navigation.*
+import com.vbytsyuk.navigation.NavigationCommand
+import com.vbytsyuk.navigation.Navigator
+import com.vbytsyuk.navigation.Tab
 
 
 class FragmentNavigator(
@@ -33,8 +35,8 @@ class FragmentNavigator(
 
     private val NavigationCommand<AppScreen>.animation: FragmentAnimation?
         get() = when (this) {
-            is ForwardCommand -> FragmentAnimation.Forward
-            is BackCommand -> FragmentAnimation.Back
+            is NavigationCommand.Forward -> FragmentAnimation.Forward
+            is NavigationCommand.Back -> FragmentAnimation.Back
             else -> null
         }
 }

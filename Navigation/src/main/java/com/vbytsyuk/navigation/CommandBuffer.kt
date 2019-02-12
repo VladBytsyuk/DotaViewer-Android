@@ -16,12 +16,6 @@ internal class CommandBuffer<Screen> {
         }
 
 
-    internal fun execute(command: NavigationCommand<Screen>) {
-        val lockedNavigator: Navigator<Screen>? = navigator
-        if (lockedNavigator != null) {
-            lockedNavigator.baseApply(command)
-        } else {
-            queue.add(command)
-        }
-    }
+    internal fun execute(command: NavigationCommand<Screen>) =
+        navigator?.baseApply(command) ?: queue.add(command)
 }

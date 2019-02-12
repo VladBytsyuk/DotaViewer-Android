@@ -21,9 +21,9 @@ public abstract class Navigator<Screen>(tabsToRoot: Map<Tab, Screen>) {
 
     internal fun baseApply(command: NavigationCommand<Screen>) {
         when (command) {
-            is ForwardCommand -> activeTabStack.push(command.destination)
-            is BackCommand -> if (activeTabStack.size > 1) activeTabStack.pop()
-            is ChangeTabCommand -> activeTab = command.tab
+            is NavigationCommand.Forward -> activeTabStack.push(command.destination)
+            is NavigationCommand.Back -> if (activeTabStack.size > 1) activeTabStack.pop()
+            is NavigationCommand.ChangeTabCommand -> activeTab = command.tab
         }
         apply(command)
     }

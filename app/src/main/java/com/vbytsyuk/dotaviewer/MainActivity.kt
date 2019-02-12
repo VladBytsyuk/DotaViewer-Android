@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class MainActivity : FragmentActivity() {
+
     private val navigator: FragmentNavigator by inject()
     private val router: Router<AppScreen> by inject()
 
@@ -37,10 +38,11 @@ class MainActivity : FragmentActivity() {
         }
     }
 
-    override fun onBackPressed() =
+    override fun onBackPressed() {
         if (navigator.activeTabStack.size > 1) {
             router.back()
         } else {
             finishAndRemoveTask()
         }
+    }
 }

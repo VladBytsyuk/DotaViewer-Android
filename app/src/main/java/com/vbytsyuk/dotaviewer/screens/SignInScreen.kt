@@ -49,7 +49,9 @@ class SignInFragment : BaseMvpFragment<SignInData, SignInPresenter>(), ISignInEv
     }
 
 
-    override fun done() = router.navigateTo(ProfileFragment())
+    override fun done() {
+        router.navigateTo(ProfileFragment())
+    }
 }
 
 
