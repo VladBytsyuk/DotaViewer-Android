@@ -33,18 +33,8 @@ class FragmentNavigator(
 
     private val NavigationCommand<AppScreen>.animation: FragmentAnimation?
         get() = when (this) {
-            is ForwardCommand -> forwardCommandAnimation
-            is BackCommand -> backCommandAnimation
+            is ForwardCommand -> FragmentAnimation.Forward
+            is BackCommand -> FragmentAnimation.Back
             else -> null
         }
-
-    private val forwardCommandAnimation = FragmentAnimation(
-        newScreenEnter = R.anim.enter_right, newScreenExit = R.anim.exit_left,
-        oldScreenEnter = R.anim.enter_left, oldScreenExit = R.anim.exit_right
-    )
-
-    private val backCommandAnimation = FragmentAnimation(
-        newScreenEnter = R.anim.enter_left, newScreenExit = R.anim.exit_right,
-        oldScreenEnter = R.anim.enter_right, oldScreenExit = R.anim.exit_left
-    )
 }

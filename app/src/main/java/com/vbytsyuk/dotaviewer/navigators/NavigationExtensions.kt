@@ -1,17 +1,20 @@
 package com.vbytsyuk.dotaviewer.navigators
 
-import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
+enum class FragmentAnimation(val transition: Int) {
+    Forward(FragmentTransaction.TRANSIT_FRAGMENT_OPEN),
+    Back(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+}
 
 internal fun FragmentManager.changeFragment(
     containerViewId: Int,
     newFragment: Fragment,
     animation: FragmentAnimation? = null
 ) = transaction {
-    animation?.let { setCustomAnimations(it) }
+    animation?.let { setTransition(animation.transition) }
     replaceWithTag(containerViewId, newFragment)
 }
 
@@ -23,16 +26,3 @@ internal fun FragmentTransaction.replaceWithTag(
     containerViewId: Int,
     fragment: Fragment
 ) = replace(containerViewId, fragment, fragment.tag)
-
-internal fun FragmentTransaction.setCustomAnimations(
-    animations: FragmentAnimation
-) = setCustomAnimations(
-    animations.newScreenEnter, animations.newScreenExit,
-    animations.oldScreenEnter, animations.oldScreenExit
-)
-
-
-internal data class FragmentAnimation(
-    @AnimRes val newScreenEnter: Int, @AnimRes val newScreenExit: Int,
-    @AnimRes val oldScreenEnter: Int, @AnimRes val oldScreenExit: Int
-)
