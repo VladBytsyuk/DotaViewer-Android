@@ -4,50 +4,35 @@ import androidx.annotation.AnimRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.vbytsyuk.dotaviewer.snapshot
 
 
-internal fun FragmentManager.replace(
+internal fun FragmentManager.changeFragment(
     containerViewId: Int,
-    fragment: Fragment,
-    oldFragment: Fragment? = null,
-    animationIds: FragmentAnimation? = null
+    newFragment: Fragment,
+    animation: FragmentAnimation? = null
 ) = transaction {
-    animationIds?.let {
-        setCustomAnimations(
-            it.newScreenEnter,
-            it.newScreenExit,
-            it.oldScreenEnter,
-            it.oldScreenExit
-        )
-    }
-    oldFragment?.let { old ->
-        fragments.snapshot.filter { it != old }.forEach { remove(it) }
-    }
-    replaceWithTag(containerViewId, fragment, oldFragment, !fragments.contains(fragment))
+    animation?.let { setCustomAnimations(it) }
+    replaceWithTag(containerViewId, newFragment)
 }
 
 internal fun FragmentManager.transaction(
     action: FragmentTransaction.() -> FragmentTransaction
-) = beginTransaction().action().commit()
-
+) = beginTransaction().disallowAddToBackStack().action().commit()
 
 internal fun FragmentTransaction.replaceWithTag(
     containerViewId: Int,
-    newFragment: Fragment,
-    oldFragment: Fragment? = null,
-    isSafe: Boolean = false
-): FragmentTransaction {
-    if (oldFragment != null && isSafe) {
-        hide(oldFragment)
-        return add(containerViewId, newFragment, newFragment.tag)
-    } else {
-        return replace(containerViewId, newFragment, newFragment.tag)
-    }
-}
+    fragment: Fragment
+) = replace(containerViewId, fragment, fragment.tag)
+
+internal fun FragmentTransaction.setCustomAnimations(
+    animations: FragmentAnimation
+) = setCustomAnimations(
+    animations.newScreenEnter, animations.newScreenExit,
+    animations.oldScreenEnter, animations.oldScreenExit
+)
 
 
-data class FragmentAnimation(
+internal data class FragmentAnimation(
     @AnimRes val newScreenEnter: Int, @AnimRes val newScreenExit: Int,
     @AnimRes val oldScreenEnter: Int, @AnimRes val oldScreenExit: Int
 )

@@ -30,9 +30,9 @@ class DotaViewerApp : Application() {
 
     private val mvpKoinModule: Module
         get() = module {
-            viewModel { SignInPresenter(SignInViewState()) }
-            viewModel { ProfilePresenter(ProfileViewState()) }
-            viewModel { ProPresenter(ProViewState()) }
+            viewModel { SignInPresenter() }
+            viewModel { ProfilePresenter() }
+            viewModel { ProPresenter() }
         }
 
     private val dataKoinModule: Module

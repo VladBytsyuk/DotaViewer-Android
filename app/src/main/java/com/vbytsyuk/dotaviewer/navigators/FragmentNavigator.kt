@@ -17,21 +17,18 @@ class FragmentNavigator(
 
     var fragmentManager: FragmentManager? = null
 
-    private var oldFragment: Fragment? = null
     private val activeFragment: Fragment get() = activeScreen
 
 
     override fun apply(command: NavigationCommand<AppScreen>) {
-        replace(activeFragment, command.animation)
+        changeFragment(activeFragment, command.animation)
     }
 
-    fun initScreen() = replace(activeFragment)
+    fun initScreen() = changeFragment(activeFragment)
 
 
-    private fun replace(newFragment: Fragment, animation: FragmentAnimation? = null) {
-        fragmentManager?.replace(R.id.fragmentContainer, newFragment, oldFragment, animation)
-        oldFragment = newFragment
-    }
+    private fun changeFragment(newFragment: Fragment, animation: FragmentAnimation? = null) =
+        fragmentManager?.changeFragment(R.id.fragmentContainer, newFragment, animation)
 
 
     private val NavigationCommand<AppScreen>.animation: FragmentAnimation?
@@ -41,19 +38,13 @@ class FragmentNavigator(
             else -> null
         }
 
-    private val forwardCommandAnimation: FragmentAnimation
-        get() = FragmentAnimation(
-            newScreenEnter = R.anim.enter_right,
-            newScreenExit = R.anim.exit_left,
-            oldScreenEnter = R.anim.exit_left,
-            oldScreenExit = R.anim.exit_left
-        )
+    private val forwardCommandAnimation = FragmentAnimation(
+        newScreenEnter = R.anim.enter_right, newScreenExit = R.anim.exit_left,
+        oldScreenEnter = R.anim.enter_left, oldScreenExit = R.anim.exit_right
+    )
 
-    private val backCommandAnimation: FragmentAnimation
-        get() = FragmentAnimation(
-            newScreenEnter = R.anim.enter_left,
-            newScreenExit = R.anim.exit_right,
-            oldScreenEnter = R.anim.exit_right,
-            oldScreenExit = R.anim.exit_right
-        )
+    private val backCommandAnimation = FragmentAnimation(
+        newScreenEnter = R.anim.enter_left, newScreenExit = R.anim.exit_right,
+        oldScreenEnter = R.anim.enter_right, oldScreenExit = R.anim.exit_left
+    )
 }

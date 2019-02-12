@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface ApiPlayer {
     @GET("players/{account_id}")
-    fun getPlayer(
+    fun getPlayerAsync(
         @Path("account_id") accountId: String
     ): Deferred<Player>
 }
